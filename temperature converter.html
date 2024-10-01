@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="h-screen flex justify-center items-center bg-gray-100">
+    <div class="max-w-md w-full p-6 bg-white shadow-md rounded">
+      <h2 class="text-2xl font-bold mb-4">Temperature Converter</h2>
+      <form>
+        <div class="flex flex-wrap mb-4">
+          <label for="temperature" class="w-full block text-gray-700 text-sm font-bold mb-2">Enter temperature:</label>
+          <input type="number" id="temperature" class="w-full p-2 pl-10 text-sm text-gray-700">
+          <select id="from-unit" class="w-full p-2 pl-10 text-sm text-gray-700">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+          </select>
+        </div>
+        <div class="flex flex-wrap mb-4">
+          <label for="to-unit" class="w-full block text-gray-700 text-sm font-bold mb-2">Convert to:</label>
+          <select id="to-unit" class="w-full p-2 pl-10 text-sm text-gray-700">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+          </select>
+        </div>
+        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Convert</button>
+      </form>
+      <div id="result" class="text-lg font-bold text-gray-700 mt-4"></div>
+    </div>
+    <script>
+      const temperatureInput = document.getElementById('temperature');
+      const fromUnitSelect = document.getElementById('from-unit');
+      const toUnitSelect = document.getElementById('to-unit');
+      const resultDiv = document.getElementById('result');
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('button').addEventListener('click', (e) => {
+          e.preventDefault();
+          const temperature = temperatureInput.value;
+          const fromUnit = fromUnitSelect.value;
+          const toUnit = toUnitSelect.value;
+
+          let result;
+          if (fromUnit === 'celsius' && toUnit === 'fahrenheit') {
+            result = (temperature * 9/5) + 32;
+          } else if (fromUnit === 'fahrenheit' && toUnit === 'celsius') {
+            result = (temperature - 32) * 5/9;
+          }
+
+          resultDiv.innerText = `The result is: ${result.toFixed(2)} ${toUnit}`;
+        });
+      });
+    </script>
+  </body>
+</html>
